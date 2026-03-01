@@ -5,42 +5,30 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { Plus, Search, Filter, MoreHorizontal, Image, QrCode } from "lucide-react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
+  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 const Products = () => {
   return (
     <Layout title="Products" subtitle="Manage your product catalog">
-      <div className="space-y-6 animate-slide-in">
+      <div className="space-y-4 animate-slide-in">
         {/* Toolbar */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
             <div className="relative flex-1 sm:flex-initial">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search products..." className="pl-9 w-full sm:w-72 h-9 bg-card border-border/50" />
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+              <Input placeholder="Search products..." className="pl-8 w-full sm:w-64 h-8 bg-card border-border text-xs" />
             </div>
             <Select>
-              <SelectTrigger className="w-40 h-9 bg-card border-border/50">
-                <Filter className="h-3.5 w-3.5 mr-2 text-muted-foreground" />
+              <SelectTrigger className="w-36 h-8 bg-card border-border text-xs">
+                <Filter className="h-3 w-3 mr-1.5 text-muted-foreground" />
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
@@ -53,35 +41,35 @@ const Products = () => {
               </SelectContent>
             </Select>
           </div>
-          <Button className="h-9">
-            <Plus className="h-4 w-4 mr-2" />
+          <Button size="sm" className="h-8 text-xs">
+            <Plus className="h-3.5 w-3.5 mr-1.5" />
             Add Product
           </Button>
         </div>
 
         {/* Products Table */}
-        <Card className="glass-card border-border/50 overflow-hidden">
+        <Card className="border-border shadow-xs overflow-hidden">
           <CardContent className="p-0">
             <Table>
               <TableHeader>
-                <TableRow className="bg-secondary/50 border-border/50">
-                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground">Product</TableHead>
-                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground">SKU</TableHead>
-                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground">Category</TableHead>
-                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground text-right">Price</TableHead>
-                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground text-right">Stock</TableHead>
-                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground">Status</TableHead>
-                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground">Supplier</TableHead>
+                <TableRow className="bg-secondary/60 border-border">
+                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Product</TableHead>
+                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">SKU</TableHead>
+                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Category</TableHead>
+                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold text-right">Price</TableHead>
+                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold text-right">Stock</TableHead>
+                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Status</TableHead>
+                  <TableHead className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Supplier</TableHead>
                   <TableHead className="w-10" />
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {products.map((product) => (
-                  <TableRow key={product.id} className="border-border/30 hover:bg-secondary/30 transition-colors">
+                  <TableRow key={product.id} className="border-border/50 hover:bg-accent/50 transition-colors">
                     <TableCell>
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center shrink-0">
-                          <Image className="h-4 w-4 text-muted-foreground" />
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded bg-secondary flex items-center justify-center shrink-0">
+                          <Image className="h-3.5 w-3.5 text-muted-foreground" />
                         </div>
                         <span className="text-sm font-medium text-foreground">{product.name}</span>
                       </div>
@@ -95,8 +83,8 @@ const Products = () => {
                     <TableCell>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground">
-                            <MoreHorizontal className="h-4 w-4" />
+                          <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground">
+                            <MoreHorizontal className="h-3.5 w-3.5" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
