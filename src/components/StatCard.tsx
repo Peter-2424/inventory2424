@@ -11,14 +11,14 @@ interface StatCardProps {
 
 export function StatCard({ title, value, change, changeType = "neutral", icon, iconBg }: StatCardProps) {
   return (
-    <div className="glass-card rounded-xl p-5 stat-glow transition-transform hover:scale-[1.02]">
+    <div className="bg-card border border-border rounded p-4 shadow-xs">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{title}</p>
-          <p className="text-2xl font-bold font-heading text-foreground mt-1">{value}</p>
+          <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide">{title}</p>
+          <p className="text-xl font-bold font-heading text-foreground mt-0.5">{value}</p>
           {change && (
             <p className={cn(
-              "text-xs mt-1 font-medium",
+              "text-[11px] mt-0.5 font-medium",
               changeType === "positive" && "text-success",
               changeType === "negative" && "text-destructive",
               changeType === "neutral" && "text-muted-foreground"
@@ -27,7 +27,7 @@ export function StatCard({ title, value, change, changeType = "neutral", icon, i
             </p>
           )}
         </div>
-        <div className={cn("flex items-center justify-center w-10 h-10 rounded-lg", iconBg || "bg-primary/10")}>
+        <div className={cn("flex items-center justify-center w-9 h-9 rounded", iconBg || "bg-primary/10")}>
           {icon}
         </div>
       </div>
