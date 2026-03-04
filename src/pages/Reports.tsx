@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Layout } from "@/components/Layout";
 import { StatCard } from "@/components/StatCard";
 import { StatusBadge } from "@/components/StatusBadge";
-import { dailySalesData, categorySalesData, products, recentSales } from "@/data/mockData";
+import { dailySalesData, categorySalesData } from "@/data/mockData";
+import { useProducts, useSales } from "@/hooks/useFirestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -36,6 +37,8 @@ const monthlyData = [
 ];
 
 const Reports = () => {
+  const { products } = useProducts();
+  const { sales: recentSales } = useSales();
   const totalRevenue = recentSales.reduce((acc, s) => acc + s.total, 0);
   const [reportTab, setReportTab] = useState("overview");
   const [salesPage, setSalesPage] = useState(1);

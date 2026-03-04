@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Layout } from "@/components/Layout";
 import { StatCard } from "@/components/StatCard";
 import { StatusBadge } from "@/components/StatusBadge";
-import { products, recentSales, dailySalesData, stockMovements } from "@/data/mockData";
+import { dailySalesData } from "@/data/mockData";
+import { useProducts, useSales, useStockMovements } from "@/hooks/useFirestore";
 import {
   Package, TrendingUp, AlertTriangle, ShoppingCart, ArrowUpRight, ArrowDownRight,
   RefreshCw, Eye, ChevronRight,
@@ -18,12 +19,15 @@ import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-const lowStockProducts = products.filter((p) => p.status !== "in-stock");
-const totalInventoryValue = products.reduce((acc, p) => acc + p.price * p.quantity, 0);
-
 const Index = () => {
   const navigate = useNavigate();
   const [refreshing, setRefreshing] = useState(false);
+  const { products } = useProducts();
+  const { sales: recentSales } = useSales();
+  const { movements: stockMovements } = useStockMovements();
+
+  const lowStockProducts = products.filter((p) => p.status !== "in-stock");
+  const totalInventoryValue = products.reduce((acc, p) => acc + p.price * p.quantity, 0);
 
   const handleRefresh = () => {
     setRefreshing(true);

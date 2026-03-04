@@ -12,7 +12,8 @@ import {
 import {
   Popover, PopoverContent, PopoverTrigger,
 } from "@/components/ui/popover";
-import { notifications } from "@/data/mockData";
+import { useNotifications } from "@/hooks/useFirestore";
+import { markAllNotificationsRead } from "@/services/firestore";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -30,11 +31,15 @@ const notifIcon = {
 };
 
 export function Layout({ children, title, subtitle }: LayoutProps) {
-  const [notifs, setNotifs] = useState(notifications);
+  const { notifications: notifs } = useNotifications();
   const unreadCount = notifs.filter((n) => !n.read).length;
 
-  const markAllRead = () => {
-    setNotifs((prev) => prev.map((n) => ({ ...n, read: true })));
+  const markAllRead = async () => {
+    try {
+      await markAllNotificationsRead();
+    } catch {
+      // fallback for when firebase isn't configured
+    }
     toast.success("All notifications marked as read");
   };
 

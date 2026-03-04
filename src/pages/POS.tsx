@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Layout } from "@/components/Layout";
-import { products } from "@/data/mockData";
+import { useProducts } from "@/hooks/useFirestore";
+import { addSale } from "@/services/firestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,7 @@ interface CartItem {
 }
 
 const POS = () => {
+  const { products } = useProducts();
   const [cart, setCart] = useState<CartItem[]>([]);
   const [discount, setDiscount] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");

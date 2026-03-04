@@ -2,7 +2,9 @@ import { useState, useMemo } from "react";
 import { Layout } from "@/components/Layout";
 import { StatCard } from "@/components/StatCard";
 import { StatusBadge } from "@/components/StatusBadge";
-import { products, stockMovements, StockMovement } from "@/data/mockData";
+import { StockMovement } from "@/data/mockData";
+import { useProducts, useStockMovements } from "@/hooks/useFirestore";
+import { addStockMovement as fbAddMovement } from "@/services/firestore";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +32,8 @@ import { toast } from "sonner";
 type MovementTab = "all" | "in" | "out" | "adjustment";
 
 const Inventory = () => {
+  const { products } = useProducts();
+  const { movements: stockMovements } = useStockMovements();
   const totalItems = products.reduce((acc, p) => acc + p.quantity, 0);
   const lowStock = products.filter((p) => p.status === "low-stock").length;
   const outOfStock = products.filter((p) => p.status === "out-of-stock").length;

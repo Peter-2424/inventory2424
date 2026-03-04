@@ -1,7 +1,9 @@
 import { useState, useMemo } from "react";
 import { Layout } from "@/components/Layout";
 import { StatusBadge } from "@/components/StatusBadge";
-import { suppliers, Supplier } from "@/data/mockData";
+import { Supplier } from "@/data/mockData";
+import { useSuppliers } from "@/hooks/useFirestore";
+import { addSupplier as fbAddSupplier, deleteSupplier as fbDeleteSupplier } from "@/services/firestore";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,6 +30,7 @@ import { cn } from "@/lib/utils";
 type SupplierTab = "all" | "active" | "inactive";
 
 const Suppliers = () => {
+  const { suppliers } = useSuppliers();
   const [tab, setTab] = useState<SupplierTab>("all");
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<Set<string>>(new Set());
