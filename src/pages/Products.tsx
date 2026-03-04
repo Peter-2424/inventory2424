@@ -1,7 +1,9 @@
 import { useState, useMemo } from "react";
 import { Layout } from "@/components/Layout";
 import { StatusBadge } from "@/components/StatusBadge";
-import { products, Product } from "@/data/mockData";
+import { Product } from "@/data/mockData";
+import { useProducts } from "@/hooks/useFirestore";
+import { addProduct as fbAddProduct, deleteProducts as fbDeleteProducts } from "@/services/firestore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,6 +37,7 @@ type SortDir = "asc" | "desc";
 const ITEMS_PER_PAGE_OPTIONS = [5, 10, 25, 50];
 
 const Products = () => {
+  const { products, loading: productsLoading } = useProducts();
   const [tab, setTab] = useState<TabFilter>("all");
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
